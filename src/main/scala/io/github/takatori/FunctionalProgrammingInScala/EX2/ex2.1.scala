@@ -1,7 +1,6 @@
-package io.github.takatori.FunctionalProgrammingInScala.ex2
+package io.github.takatori.FunctionalProgrammingInScala.EX2
 
-
-object EX2 {
+object ex2_1 {
   def main(args: Array[String]): Unit = println(fib(30))
 
   def fib(n: Int): Int = n match {
