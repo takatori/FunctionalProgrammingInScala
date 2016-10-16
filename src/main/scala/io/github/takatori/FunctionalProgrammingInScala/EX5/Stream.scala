@@ -1,5 +1,6 @@
 package io.github.takatori.FunctionalProgrammingInScala.EX5
 
+
 trait Stream[+A] {
 
   def headOption: Option[A] = this match {
@@ -15,7 +16,45 @@ trait Stream[+A] {
     }
     to(this)
   }
+
+  // EX 5.2
+  def take(n: Int): List[A] = {
+
+    def take2(stream: Stream[A], x: Int): List[A] = stream match {
+      case Empty => Nil
+      case Cons(h, t) if(x==0) => Nil
+      case Cons(h, t) => h() :: take2(t(), x-1)
+    }
+
+    take2(this, n)
+  }
+
+  // EX5.2
+  def drop(n: Int): List[A] = {
+
+    def drop2(stream: Stream[A], x: Int): Stream[A] = stream match {
+      case Empty => Empty
+      case Cons(h, t) if(x==0) => t()
+      case Cons(h, t) => drop2(t(), x-1)
+    }
+    drop2(this, n)
+  }
+
+  // EX5.2 answer
+  def takeA(n: Int): Stream[A] = this match {
+    case Cons(h, t) if n > 1 => cons(h(), t().take(n - 1))
+    case Cons(h, _) if n == 1 => cons(h(), empty)
+    case _ => empty
+  }
+
+  // EX5.2 answer
+  def dropA(n: Int): Stream[A] = this match {
+    case Cons(_, t) if n > 0 => t().dropA(n - 1)
+    case _ => this
+  }
+
 }
+
 case object Empty extends Stream[Nothing]
 case class Cons[+A](h: () => A, t: () => Stream[A]) extends Stream[A]
 
