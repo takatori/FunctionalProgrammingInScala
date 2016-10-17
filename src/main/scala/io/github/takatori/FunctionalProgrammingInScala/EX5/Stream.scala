@@ -1,5 +1,5 @@
 package io.github.takatori.FunctionalProgrammingInScala.EX5
-
+import Stream._
 
 trait Stream[+A] {
 
@@ -51,6 +51,15 @@ trait Stream[+A] {
   def dropA(n: Int): Stream[A] = this match {
     case Cons(_, t) if n > 0 => t().dropA(n - 1)
     case _ => this
+  }
+
+  // EX5.3
+  def takeWhile(p: A => Boolean): Stream[A] = {
+    this match {
+      case Empty => Empty
+      case Cons(h, t) if p(h()) => cons(h(), t().takeWhile(p))
+      case Cons(h, _) => cons(h(), Empty)
+    }
   }
 
 }
