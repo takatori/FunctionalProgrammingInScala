@@ -62,6 +62,13 @@ trait Stream[+A] {
     }
   }
 
+  // EX5.4
+  def forAll(p: A => Boolean): Boolean = this match {
+    case Cons(h, t) if p(h()) => t().forAll(p)
+    case Cons(h, empty) if p(h()) => true
+    case _ => false
+  }
+
 }
 
 case object Empty extends Stream[Nothing]
