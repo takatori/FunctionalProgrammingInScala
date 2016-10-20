@@ -1,5 +1,6 @@
 package io.github.takatori.FunctionalProgrammingInScala.EX5
 import Stream._
+import io.github.takatori.FunctionalProgrammingInScala.EX5
 
 trait Stream[+A] {
 
@@ -69,6 +70,18 @@ trait Stream[+A] {
     case _ => false
   }
 
+  def foldRight[B](z: => B)(f: (A, => B) => B): B =
+    this match {
+      case Cons(h, t) => f(h(), t().foldRight(z)(f))
+      case _ => z
+    }
+
+  def exists(p: A => Boolean): Boolean =
+    foldRight(false)((a, b) => p(a) || b)
+
+  // EX5.5
+  def takeWhile2(p: A => Boolean): Stream[A] =
+    foldRight(Empty)((a, b) => if (!p(a)) Empty else cons(a, b.takeWhile2(p)))
 }
 
 case object Empty extends Stream[Nothing]
