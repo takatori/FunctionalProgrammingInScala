@@ -82,6 +82,11 @@ trait Stream[+A] {
   // EX5.5
   def takeWhile2(p: A => Boolean): Stream[A] =
     foldRight(empty[A])((a, b) => if(p(a)) cons(a, b) else empty)
+
+  // EX5.6
+  def headOption: Option[A] = {
+    foldRight(None: Option[A])((h: A, None: Option[A]) => if (h == Empty) None else Some(h))
+  }
 }
 
 case object Empty extends Stream[Nothing]
