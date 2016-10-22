@@ -98,9 +98,17 @@ trait Stream[+A] {
   def append(a: => A): Stream[A] =
     foldRight(empty[A])((h, t) => if (h == Empty) cons(a, Empty) else cons(h, t))
 
+  // EX5.7A
+  def append[B>:A](s: => Stream[B]): Stream[B] =
+    foldRight(empty[B])((h, t) => cons(h,t))
+
   // EX5.7
   def flatMap[B](f: A => Option[B]): Stream[Option[B]] =
     foldRight(empty[Option[B]])((h, t) => cons(f(h), t))
+
+  // EX5.7A
+  def flatMap[B](f: A => Stream[B]): Stream[B] =
+    foldRight(empty[B])((h, t) => f(h) append t)
 
 }
 
@@ -119,4 +127,11 @@ object Stream {
   def apply[A](as: A*): Stream[A] =
     if(as.isEmpty) empty
     else cons(as.head, apply(as.tail: _*))
+
+  val ones: Stream[Int] = Stream.cons(1, ones)
+
+  // EX5.8
+  def constant[A](a: A): Stream[A] = Stream.cons(a, constant(a))
+
+
 }
