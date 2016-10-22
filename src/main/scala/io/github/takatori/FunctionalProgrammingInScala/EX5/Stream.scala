@@ -87,6 +87,21 @@ trait Stream[+A] {
   def headOption: Option[A] = {
     foldRight(None: Option[A])((h: A, None: Option[A]) => if (h == Empty) None else Some(h))
   }
+
+  // EX5.7
+  def map[B](f: A => B): Stream[B] = foldRight(empty[B])((h, t) => cons(f(h), t))
+
+  // EX5.7
+  def filter(f: A => Boolean): Stream[A] = foldRight(empty[A])((h, t) => if (f(h)) t else cons(h, t))
+
+  // EX5.7
+  def append(a: => A): Stream[A] =
+    foldRight(empty[A])((h, t) => if (h == Empty) cons(a, Empty) else cons(h, t))
+
+  // EX5.7
+  def flatMap[B](f: A => Option[B]): Stream[Option[B]] =
+    foldRight(empty[Option[B]])((h, t) => cons(f(h), t))
+
 }
 
 case object Empty extends Stream[Nothing]
