@@ -109,7 +109,6 @@ trait Stream[+A] {
   // EX5.7A
   def flatMap[B](f: A => Stream[B]): Stream[B] =
     foldRight(empty[B])((h, t) => f(h) append t)
-
 }
 
 case object Empty extends Stream[Nothing]
@@ -133,5 +132,9 @@ object Stream {
   // EX5.8
   def constant[A](a: A): Stream[A] = Stream.cons(a, constant(a))
 
+  // EX5.9
+  def from(n: Int): Stream[Int] = Stream.cons(n, from(n + 1))
 
+  // EX5.10
+  def fibs(a: Int, b:Int): Stream[Int] = Stream.cons(a, fibs(b, a+b))
 }
