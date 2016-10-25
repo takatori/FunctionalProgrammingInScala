@@ -143,4 +143,16 @@ object Stream {
     case None => empty[A]
     case Some(x) => cons(x._1, unfold(x._2)(f))
   }
+
+  // EX5.12
+  def fibs2(a: Int, b: Int): Stream[Int] = unfold(a)(a => Some(b, a+b))
+
+  // EX5.12
+  def from2(n: Int): Stream[Int] = unfold(n)(s => Some(s, s+1))
+
+  // EX5.12
+  def constant2[A](a: A): Stream[A] = unfold(a)(s => Some(s, s))
+
+  // EX5.12
+  def ones2: Stream[Int] = unfold(1)(1 => Some(1, 1))
 }
