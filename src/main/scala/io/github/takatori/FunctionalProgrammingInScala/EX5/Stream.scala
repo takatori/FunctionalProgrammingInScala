@@ -154,5 +154,24 @@ object Stream {
   def constant2[A](a: A): Stream[A] = unfold(a)(s => Some(s, s))
 
   // EX5.12
-  def ones2: Stream[Int] = unfold(1)(1 => Some(1, 1))
+  def ones2: Stream[Int] = unfold(1)(_ => Some(1, 1))
+
+  // EX5.13
+  def mapVerUnfold[A, B](as: Stream[A])(f: A => B): Stream[B] =
+  unfold(as)(as => as match {
+    case Empty => None
+    case Cons(h, t) => Some(f(h()), t())
+  })
+
+  // EX5.13
+  def takeVerUnfold[A](n: Int, stream: Stream[A]): Stream[A] = unfold(stream)(s => s match {
+    case Cons(h, t) if n > 0 => Some(h(), takeVerUnfold(n-1, t()))
+    case _ => None
+  })
+
+  // EX5.13
+  def takeWhileVerUnfold[A](f: A => Boolean, stream: Stream[A]): Stream[A] = unfold(stream)(s => s match {
+    case Cons(h, t) if f(h()) => Some(h(), takeWhileVerUnfold(f, t()))
+    case _ => None
+  })
 }
