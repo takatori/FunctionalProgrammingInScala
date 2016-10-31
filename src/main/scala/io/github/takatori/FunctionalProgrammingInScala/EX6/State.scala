@@ -28,4 +28,11 @@ object RNG {
         case _ => _
     }
   }
+
+  // EX6.1 answer
+  def nonNegativeIntA(rng: RNG): (Int, RNG) = {
+    val (i, r) = rng.nextInt
+    (if (i < 0) -(i + 1) else i, r)
+  }
+
 }
