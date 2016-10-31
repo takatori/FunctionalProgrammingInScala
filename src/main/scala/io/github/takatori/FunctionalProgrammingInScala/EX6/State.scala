@@ -3,7 +3,6 @@ package io.github.takatori.FunctionalProgrammingInScala.EX6
 
 trait RNG {
   def nextInt: (Int, RNG)
-  type Rand[+A] = RNG => (A, RNG)
 }
 
 object RNG {
@@ -17,7 +16,16 @@ object RNG {
     }
   }
 
+  // typeを使って型（クラス・トレイト・関数型等）に別名（alias）を付けられる。
   type Rand[+A] = RNG => (A, RNG)
 
   val int: Rand[Int] = _.nextInt
+
+  // EX6.1
+  def nonNegativeInt(rng: RNG): (Int, RNG) = {
+      rng.nextInt match {
+        case (Int.MinValue, r) => (0, r)
+        case _ => _
+    }
+  }
 }
