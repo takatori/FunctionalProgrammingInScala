@@ -35,4 +35,15 @@ object RNG {
     (if (i < 0) -(i + 1) else i, r)
   }
 
+  // EX6.2
+  def double(rng: RNG): (Double, RNG) = {
+    val (i, r) = nonNegativeIntA(rng)
+    ((i / Int.MaxValue).toDouble, r)
+  }
+
+  // EX6.2 answer
+  def doubleA(rng: RNG): (Double, RNG) = {
+    val (i, r) = nonNegativeInt(rng)
+    (i / (Int.MaxValue.toDouble + 1), r)
+  }
 }
