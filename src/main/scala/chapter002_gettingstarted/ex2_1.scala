@@ -1,4 +1,4 @@
-package io.github.takatori.FunctionalProgrammingInScala.EX2
+package chapter002_gettingstarted
 
 object ex2_1 {
   def main(args: Array[String]): Unit = println(fib(30))

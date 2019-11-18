@@ -1,4 +1,4 @@
-package io.github.takatori.FunctionalProgrammingInScala.EX3
+package chapter003_datastructures
 
 /**
   * Created by takatorisatoshi on 2016/10/08.

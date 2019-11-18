@@ -1,5 +1,4 @@
-package io.github.takatori.FunctionalProgrammingInScala.EX6
-
+package chapter006_state
 
 trait RNG {
   def nextInt: (Int, RNG)

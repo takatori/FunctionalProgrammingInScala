@@ -1,7 +1,6 @@
-package io.github.takatori.FunctionalProgrammingInScala.EX7
+package chapter007_parallelism
 
-
-  object Examples {
+object Par {
     def sum(ints: IndexedSeq[Int]): Int =
       if (ints.size <= 1)
         ints.headOption getOrElse 0

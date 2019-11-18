@@ -1,6 +1,6 @@
-package io.github.takatori.FunctionalProgrammingInScala.EX5
+package chapter005_laziness
+
 import Stream._
-import io.github.takatori.FunctionalProgrammingInScala.EX5
 
 trait Stream[+A] {
 

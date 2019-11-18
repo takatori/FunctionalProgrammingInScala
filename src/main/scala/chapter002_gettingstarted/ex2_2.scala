@@ -1,8 +1,5 @@
-package io.github.takatori.FunctionalProgrammingInScala.EX2.ex2_2
+package chapter002_gettingstarted
 
-/**
-  * Created by takatorisatoshi on 2016/10/06.
-  */
 object ex2_2 {
   def main(args: Array[String]): Unit = {
     println(isSorted(Array(1, 2, 3), (x: Int, y: Int) => x < y))

@@ -1,4 +1,4 @@
-package io.github.takatori.FunctionalProgrammingInScala.EX3
+package chapter003_datastructures
 
 sealed trait List[+A]
 case object Nil extends List[Nothing]

@@ -1,4 +1,4 @@
-package io.github.takatori.FunctionalProgrammingInScala.EX4
+package chapter004_errorhandling
 
 /**
   * Created by takatorisatoshi on 2016/10/09.
